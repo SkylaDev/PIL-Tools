@@ -2,9 +2,11 @@ PIL-Tools
 =========
 ##### Created by Steven Shrewsbury (stshrewsburyDev)
 
-[![python-version](https://img.shields.io/pypi/pyversions/PIL-Tools.svg)](https://pypi.python.org/pypi/PIL-Tools)
+[![downloads](https://pepy.tech/badge/PIL-Tools)](https://pepy.tech/project/PIL-Tools)
+[![python version](https://img.shields.io/pypi/pyversions/PIL-Tools.svg)](https://pypi.python.org/pypi/PIL-Tools)
 [![version](https://img.shields.io/pypi/v/PIL-Tools.svg)](https://pypi.python.org/pypi/PIL-Tools)
 [![license](https://img.shields.io/pypi/l/PIL-Tools.svg)](https://pypi.python.org/pypi/PIL-Tools)
+[![documentation status](https://readthedocs.org/projects/pil-tools/badge/?version=latest)](https://pil-tools.readthedocs.io/en/latest/?badge=latest)
 
 An extension module for [Pillow](https://github.com/python-pillow/Pillow "Pillow GitHub repo") to add functions that help simplify some processes.
 
