@@ -140,6 +140,7 @@ Constants
     A simple list of tuples that define the default colours used in the rainbow text.
 
     **List of colours:**
+
     * ``(255, 0, 0)`` - Red
     * ``(255, 106, 0)`` - Orange
     * ``(255, 216, 0)`` - Yellow
