@@ -10,6 +10,10 @@ PIL-Tools
 
 An extension module for [Pillow](https://github.com/python-pillow/Pillow "Pillow GitHub repo") to add functions that help simplify some processes.
 
+Change logs:
+------------
+[Version 0.2 changelogs](https://pil-tools.readthedocs.io/en/latest/releasenotes/0.2.html)
+
 Notices:
 -------
 * This module is still a work in progress, I plan to more features in the future but please don't expect quick updates as I have college work, personal life and other projects I work on at the same time as this one.
@@ -38,4 +42,5 @@ Links:
 ------
 * [GitHub repo](https://github.com/stshrewsburyDev/PIL-Tools/)
 * [PyPi project page](https://pypi.org/project/PIL-Tools/)
+* [Documentation](https://pil-tools.readthedocs.io/en/latest/)
 * [My website](https://stshrewsburydev.github.io/)

@@ -5,7 +5,7 @@ with open("README.md") as README:
 
 setup(
     name='PIL-Tools',
-    version='0.1',
+    version='0.2',
     description='An extension module for Pillow to add functions that help simplify some processes.',
     license='MIT',
     long_description=long_description,
@@ -14,7 +14,7 @@ setup(
     author_email='',
     url='https://github.com/stshrewsburyDev/PIL-Tools',
     packages=['PILTools'],
-    install_requires=['Pillow'],
+    install_requires=['Pillow', 'requests'],
     python_requires='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3",

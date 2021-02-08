@@ -45,6 +45,7 @@ Overview
    :maxdepth: 2
 
    reference/index.rst
+   releasenotes/index.rst
 
 
 Installation

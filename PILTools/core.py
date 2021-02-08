@@ -1,7 +1,24 @@
 from PIL import Image, ImageDraw
 
 
-def rounded_edge_mask(size, radius: int, inverted: bool = False, tl: bool = True, tr: bool = True, bl: bool = True,
+def multiline_check(text):
+    split_character = "\n" if isinstance(text, str) else b"\n"
+
+    return split_character in text
+
+
+def multiline_split(text):
+    split_character = "\n" if isinstance(text, str) else b"\n"
+
+    return text.split(split_character)
+
+
+def rounded_edge_mask(size,
+                      radius: int,
+                      inverted: bool = False,
+                      tl: bool = True,
+                      tr: bool = True,
+                      bl: bool = True,
                       br: bool = True):
     """
     Generates a PIL mask of a box with rounded edges.
