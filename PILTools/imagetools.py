@@ -1,45 +1,9 @@
-from . import core
-from PIL import Image, ImageDraw, ImageOps, ImageFont
+from . import core, error
+from PIL import Image, ImageDraw, ImageOps, ImageFont, ImageFilter
 from random import choice
 
 
-class _requests_not_installed:
-    def __getattr__(self, id):
-        raise ImportError("The requests module is not installed, get it here https://pypi.org/project/requests/")
-
-
-try:
-    import requests
-except ImportError:
-    requests = _requests_not_installed()
-
-
 RAINBOW_DEFAULT = [(255, 0, 0), (255, 106, 0), (255, 216, 0), (0, 170, 0), (0, 148, 255), (0, 65, 106), (120, 0, 175)]
-
-
-def open_online(url, mode="RGBA", size=None, resize_type=3):
-    """
-    Fetches an image from the internet and then loads it into PIL.
-    Requires the requests module to work, get it here https://pypi.org/project/requests/
-
-    :param url: str
-    :param mode: str
-    :param size: tuple
-    :param resize_type: int
-    :return: PIL.Image.Image
-    """
-    r = requests.get(url, stream=True)
-    r.raw.decode_content = True
-    i = Image.open(r.raw).convert("RGBA")
-
-    if size:
-        i.resize(size, resize_type)
-
-    if mode != "RGBA":
-        r, g, b, a = i.split()
-        i = Image.merge("RGB", (r, g, b))
-
-    return i.convert(mode)
 
 
 class Draw:
@@ -61,19 +25,99 @@ class Draw:
 
     def black_and_white(self, threshold: int=150):
         """
-        Converts replaces the colour in the image with just black and white without changing the base image mode.
+        Converts replaces the colour in the image with just black and white without changing the base image mode (supports transparency).
 
         :param threshold: int
         """
 
-        self.image.paste(self.image.convert("L").point(lambda x: 255 if x > threshold else 0, mode='1'))
+        check, val = core.check_thresh(threshold)
+        if check:
+            raise error.InvalidThreshold(f"invalid threshold provided ({val}), must be between 0-255")
+
+        logic = lambda x: 255 if x > threshold else 0
+
+        if self.image.mode == "RGBA":
+            r, g, b, a = self.image.split()
+            i = Image.merge("RGB", (r, g, b))
+
+            i = (i.convert("L").point(logic, mode='1')).convert("RGB")
+            r2, g2, b2 = i.split()
+
+            image = Image.merge("RGBA", (r2, g2, b2, a))
+        else:
+            image = self.image.convert("L").point(logic, mode='1')
+
+        self.image.paste(image)
+
+    def blue_screen(self, r_threshold: int=75, g_threshold: int=75, b_threshold: int=100):
+        """
+        Attempts to remove blue from an image based on the thresholds set.
+
+        :param r_threshold: int
+        :param g_threshold: int
+        :param b_threshold: int
+        """
+
+        check, val = core.check_thresh([r_threshold, g_threshold, b_threshold])
+        if check:
+            raise error.InvalidThreshold(f"invalid threshold provided ({val}), must be between 0-255")
+
+        im = self.image.convert("RGBA")
+        image_data = im.load()
+        image_size = im.size
+
+        for x in range(image_size[1]):
+            for y in range(image_size[0]):
+                pixel = image_data[y, x]
+                if pixel[0] < r_threshold and pixel[1] < g_threshold and pixel[2] > b_threshold or pixel[:3] == [0, 0, 0]:
+                    image_data[y, x] = 0
+        im = im.filter(ImageFilter.GaussianBlur(radius=1))
+
+        self.image.paste(im.convert(self.image.mode))
 
     def grayscale(self):
         """
-        Converts replaces the colour in the image with shades of gray without changing the base image mode.
+        Converts replaces the colour in the image with shades of gray without changing the base image mode (supports transparency).
         """
 
-        self.image.paste(self.image.convert("L"))
+        if self.image.mode == "RGBA":
+            r, g, b, a = self.image.split()
+            i = Image.merge("RGB", (r, g, b))
+
+            i = (i.convert("L")).convert("RGB")
+            r2, g2, b2 = i.split()
+
+            image = Image.merge("RGBA", (r2, g2, b2, a))
+        else:
+            image = self.image.convert("L")
+
+        self.image.paste(image)
+
+    def green_screen(self, r_threshold: int=80, g_threshold: int=100, b_threshold: int=80):
+        """
+        Attempts to remove green from an image based on the thresholds set.
+
+        :param r_threshold: int
+        :param g_threshold: int
+        :param b_threshold: int
+        """
+
+        check, val = core.check_thresh([r_threshold, g_threshold, b_threshold])
+        if check:
+            raise error.InvalidThreshold(f"invalid threshold provided ({val}), must be between 0-255")
+
+        im = self.image.convert("RGBA")
+        image_data = im.load()
+        image_size = im.size
+
+        for x in range(image_size[1]):
+            for y in range(image_size[0]):
+                pixel = image_data[y, x]
+                if pixel[0] < r_threshold and pixel[1] > g_threshold and pixel[2] < b_threshold or pixel[:3] == [0, 0, 0]:
+                    image_data[y, x] = 0
+        im = im.filter(ImageFilter.GaussianBlur(radius=1))
+
+        self.image.paste(im.convert(self.image.mode))
 
     def invert(self):
         """
@@ -229,6 +273,32 @@ class Draw:
 
                 current = next_colour(current)
             y += font.getsize(line)[1] + spacing
+
+    def red_screen(self, r_threshold: int=100, g_threshold: int=75, b_threshold: int=75):
+        """
+        Attempts to remove red from an image based on the thresholds set.
+
+        :param r_threshold: int
+        :param g_threshold: int
+        :param b_threshold: int
+        """
+
+        check, val = core.check_thresh([r_threshold, g_threshold, b_threshold])
+        if check:
+            raise error.InvalidThreshold(f"invalid threshold provided ({val}), must be between 0-255")
+
+        im = self.image.convert("RGBA")
+        image_data = im.load()
+        image_size = im.size
+
+        for x in range(image_size[1]):
+            for y in range(image_size[0]):
+                pixel = image_data[y, x]
+                if pixel[0] > r_threshold and pixel[1] < g_threshold and pixel[2] < b_threshold or pixel[:3] == [0, 0, 0]:
+                    image_data[y, x] = 0
+        im = im.filter(ImageFilter.GaussianBlur(radius=1))
+
+        self.image.paste(im.convert(self.image.mode))
 
     def rounded_edges(self,
                       radius: int,

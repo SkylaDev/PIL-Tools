@@ -1,0 +1,82 @@
+Version 1.0
+-----------
+
+
+Changes:
+========
+
+async support for open_online()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+I planned to add this feature before but never got around to doing it.
+
+Now it is here! Async support for the module, currently this only affects the :py:meth:`open_online()` function as it adds the new :py:meth:`async_open_online()` method.
+
+With this method you can now download and load images into PIL but using aiohttp with async support instead of requests without it.
+
+.. code-block:: python
+
+    import PILTools
+
+    image = await PILTools.async_open_online(url="http://example.com/image.png", mode="RGB")
+    # Note: http://example.com/image.png isn't actually an image it is just there for example purposes
+
+For more info about how to use this function please refer to the library reference.
+
+
+Moved online image open functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Moved the :py:meth:`open_online()` and :py:meth:`async_open_online()` to the base of the module to make things cleaner and easier to access.
+
+.. code-block:: python
+
+    import PILTools
+
+    # Old (before ver 1.0)
+    image = PILTools.ImageTools.open_online(url="http://example.com/image.png", mode="RGB")
+
+    # New (ver 1.0 and after)
+    image = PILTools.open_online(url="http://example.com/image.png", mode="RGB")
+
+    # Note: http://example.com/image.png isn't actually an image it is just there for example purposes
+
+
+Added custom errors
+^^^^^^^^^^^^^^^^^^^
+
+Added better error messages to some functions.
+
+
+Fixed transparency issues
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Noticed some of the functions in the ImageTools :py:class:`Draw()` class were not fully supporting transparency so I fixed them up.
+
+**Now fixed functions:**
+
+* :py:meth:`Draw.black_and_white()`
+* :py:meth:`Draw.grayscale()` / :py:meth:`Draw.greyscale()`
+
+
+Additions:
+==========
+
+async support for opening online images
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+New function :py:meth:`async_open_online()` added using aiohttp to asynchronously download images into PIL.
+
+
+Chroma key functions
+^^^^^^^^^^^^^^^^^^^^
+
+Added 3 new functions to the ImageTools :py:class:`Draw()` class:
+
+* :py:meth:`Draw.blue_screen()`
+* :py:meth:`Draw.green_screen()`
+* :py:meth:`Draw.red_screen()`
+
+With these functions you are able to filter out one of either red, green or blue from an image similar to a chroma key effect.
+
+You can customise the thresholds used in the filter to get better results, please refer to the function's docs for more info.

@@ -27,7 +27,7 @@ An extension module for `Pillow <https://github.com/python-pillow/Pillow>`_ to a
     import PILTools
 
     image = PIL.Image.open("test.png")
-    image_draw = PILTools.ImageTools(image)
+    image_draw = PILTools.ImageTools.Draw(image)
 
     # Add a black and white filter to the image with a custom threshold
     image_draw.black_and_white(threshold=100)
@@ -68,6 +68,11 @@ Install from source
 ::
 
     $ python setup.py install
+
+Install async support:
+^^^^^^^^^^^^^^^^^^^^^^
+
+Refer to the aiohttp install docs found [Here](https://docs.aiohttp.org/en/stable/#library-installation)
 
 
 Support

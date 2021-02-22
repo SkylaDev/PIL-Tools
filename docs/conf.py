@@ -24,8 +24,8 @@ copyright = '2021, Steven Shrewsbury (stshrewsburyDev)'
 author = 'Steven Shrewsbury (stshrewsburyDev)'
 
 # The full version, including alpha/beta/rc tags
-version = '0.2'
-release = '0.2'
+version = '1.0'
+release = '1.0'
 
 
 # -- General configuration ---------------------------------------------------

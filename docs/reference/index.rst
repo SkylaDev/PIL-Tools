@@ -2,6 +2,8 @@ Reference
 =========
 
 .. toctree::
-   :maxdepth: 2
+  :maxdepth: 2
 
-   ImageTools
+  PILTools
+  ImageTools
+  Errors

@@ -14,3 +14,4 @@ functionality and security fixes should not be expected to be backported to earl
   :maxdepth: 2
 
   0.2
+  1.0

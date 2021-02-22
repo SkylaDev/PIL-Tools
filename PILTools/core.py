@@ -1,6 +1,30 @@
 from PIL import Image, ImageDraw
 
 
+def check_thresh(n):
+    if isinstance(n, int):
+        if not -1 < n < 256:
+            return True, n
+        else:
+            return False, None
+    else:
+        for n_ in n:
+            if not -1 < n_ < 256:
+                return True, n_
+        return False, None
+
+
+def format_image(image, mode="RGBA", size=None, resize_type=3):
+    if size:
+        image = image.resize(size, resize_type)
+
+    if mode != "RGBA":
+        r, g, b, a = image.split()
+        image = Image.merge("RGB", (r, g, b))
+
+    return image
+
+
 def multiline_check(text):
     split_character = "\n" if isinstance(text, str) else b"\n"
 

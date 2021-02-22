@@ -12,7 +12,7 @@ An extension module for [Pillow](https://github.com/python-pillow/Pillow "Pillow
 
 Change logs:
 ------------
-[Version 0.2 changelogs](https://pil-tools.readthedocs.io/en/latest/releasenotes/0.2.html)
+[Version 1.0 changelogs](https://pil-tools.readthedocs.io/en/latest/releasenotes/1.0.html)
 
 Notices:
 -------
@@ -37,6 +37,10 @@ pip install PIL-Tools --upgrade
 ```
 python setup.py install
 ```
+
+###### Install async support:
+
+Refer to the aiohttp install docs found [Here](https://docs.aiohttp.org/en/stable/#library-installation)
 
 Links:
 ------
