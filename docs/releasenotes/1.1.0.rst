@@ -1,0 +1,14 @@
+Version 1.1.0
+-------------
+
+
+Additions:
+==========
+
+* New function :py:meth:`Draw.create_mask()` added allowing you to easily create image masks of defined images.
+
+
+Changes:
+========
+
+* Changed version naming scheme from `major.minor/fix` to `major.minor.fix`.

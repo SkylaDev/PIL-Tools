@@ -12,13 +12,13 @@ An extension module for [Pillow](https://github.com/python-pillow/Pillow "Pillow
 
 Change logs:
 ------------
-[Version 1.0 changelogs](https://pil-tools.readthedocs.io/en/latest/releasenotes/1.0.html)
+[Latest changelogs](https://pil-tools.readthedocs.io/en/latest/releasenotes/1.1.0.html)
 
 Notices:
 -------
 * This module is still a work in progress, I plan to more features in the future but please don't expect quick updates as I have college work, personal life and other projects I work on at the same time as this one.
 * This module was designed to be used with Pillow (the fork of PIL) and not the original PIL module, chances are this module will not work with it.
-* This module was designed for Pillow 8.1.0 but may work with older versions, use at your own risk however.
+* This module was designed for Pillow 8.2.0 but may work with older/newer versions, use at your own risk however.
 
 Installation:
 -------------

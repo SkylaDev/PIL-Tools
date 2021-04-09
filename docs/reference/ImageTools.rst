@@ -67,6 +67,17 @@ Methods
 
     :raises: :py:exc:`InvalidThreshold()` if one of the thresholds provided were invalid (not in 0-255).
 
+.. py:method:: Draw.create_mask(image=None)
+
+    Creates a mask of the current image or a defined image.
+
+    *New in 1.1.0*
+
+    :param PIL.Image.Image image: The image you wish to create a mask of, will use the current image if not defined.
+
+    :returns: A generated mask in `L` mode.
+    :rtype: PIL.Image.Image
+
 .. py:method:: Draw.grayscale()
 
     Converts replaces the colour in the image with shades of gray without changing the base image mode.

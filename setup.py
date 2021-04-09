@@ -5,7 +5,7 @@ with open("README.md") as README:
 
 setup(
     name='PIL-Tools',
-    version='1.0',
+    version='1.1.0',
     description='An extension module for Pillow to add functions that help simplify some processes.',
     license='MIT',
     long_description=long_description,

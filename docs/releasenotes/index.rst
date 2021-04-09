@@ -15,3 +15,4 @@ functionality and security fixes should not be expected to be backported to earl
 
   0.2
   1.0
+  1.1.0

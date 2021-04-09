@@ -75,6 +75,20 @@ class Draw:
 
         self.image.paste(im.convert(self.image.mode))
 
+    def create_mask(self, image: Image.Image=None):
+        """
+        Create a mask of the current image or a defined image.
+
+        :param image: PIL.Image.Image
+        :return PIL.Image.Image
+        """
+
+        image = image or self.image
+        mask = Image.new("L", image.size)
+        mask.paste(Image.new("L", mask.size, 256), (0, 0), image)
+
+        return mask
+
     def grayscale(self):
         """
         Converts replaces the colour in the image with shades of gray without changing the base image mode (supports transparency).
